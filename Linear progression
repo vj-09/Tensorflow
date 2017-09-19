@@ -1,0 +1,22 @@
+import tensorflow as tf
+import numpy as np
+
+
+a = tf.Variable(2.0)
+b = tf.Variable(2.0)
+x =(1.0,3.0,5.0)
+d=(6.0,12.0,18.0)
+y= a * x + b
+loss = tf.reduce_mean(tf.square(y - d))
+optimizer = tf.train.GradientDescentOptimizer(0.005)
+train = optimizer.minimize(loss)
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init)
+train_data = []
+for step in range(100000):
+    evals = sess.run([train,a,b])
+    if step % 5 == 0:
+         
+        print(step, evals)
+        train_data.append(evals)
